@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pembayaran — Sahabat Baju</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <nav class="navbar">
+    <div class="logo">🧺 Sahabat Baju</div>
+    <div class="nav-right">
+      <a href="index.html">Beranda</a>
+      <a href="order.html">Pesan</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="card payment-box">
+      <h2>💳 Pembayaran</h2>
+      <p style="color:#888; margin-bottom:16px;">Scan QR untuk melakukan pembayaran</p>
+
+      <div style="background:#f0f2f5; border-radius:8px; padding:16px; margin-bottom:16px;">
+        <div class="detail-row">
+          <span>Nama</span>
+          <span id="payNama">-</span>
+        </div>
+        <div class="detail-row">
+          <span>Metode</span>
+          <span id="payMetode">-</span>
+        </div>
+        <div class="detail-row">
+          <span>Total Bayar</span>
+          <span id="payTotal">-</span>
+        </div>
+      </div>
+
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=Sahabat-Baju" alt="QR Code">
+
+      <br><br>
+      <a href="index.html" class="btn btn-success">✅ Selesai</a>
+    </div>
+  </div>
+
+  <div class="footer">&copy; 2026 Sahabat Baju - Kelompok 4</div>
+
+  <script>
+    // Ambil data dari URL
+    const params = new URLSearchParams(window.location.search);
+    const nama = params.get('nama') || '-';
+    const total = parseInt(params.get('total')) || 0;
+    const metode = params.get('metode') || '-';
+
+    document.getElementById('payNama').textContent = nama;
+    document.getElementById('payMetode').textContent = metode;
+    document.getElementById('payTotal').textContent = 'Rp' + total.toLocaleString('id-ID');
+  </script>
+</body>
+
+</html>

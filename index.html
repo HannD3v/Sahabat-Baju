@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sahabat Baju — Beranda</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <nav class="navbar">
+    <div class="logo">🧺 Sahabat Baju</div>
+    <div class="nav-right">
+      <a href="index.html">Beranda</a>
+      <a href="order.html">Pesan</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <h1>Sahabat Baju Digital ✨</h1>
+    <p>Rp20.000 / keranjang</p>
+    <a href="order.html" class="btn btn-primary">Pesan Sekarang</a>
+  </header>
+
+  <div class="container">
+
+    <!-- Paragraf tentang laundry -->
+    <div class="card">
+      <h2>🧺 Tentang Kami</h2>
+      <p style="color:#555; line-height:1.7;">
+        <strong>Sahabat Baju</strong> adalah layanan laundry digital yang hadir untuk memudahkan kebutuhan cuci pakaian
+        Anda.
+        Kami menyediakan layanan cuci kiloan dengan harga terjangkau yaitu <strong>Rp20.000 per keranjang</strong>.
+        Dengan sistem pemesanan online, Anda bisa memesan kapan saja tanpa perlu antri.
+        Pakaian Anda akan dicuci bersih, wangi, dan rapi oleh tim profesional kami.
+        Kami juga menerima pembayaran secara Cash, Transfer Bank, maupun E-Wallet untuk kemudahan transaksi.
+      </p>
+    </div>
+
+    <!-- Statistik Pesanan -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-label"> Total Pesanan</div>
+        <div class="stat-value" id="statOrders">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label"> Total Keranjang</div>
+        <div class="stat-value" id="statBaskets">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label"> Total Pendapatan</div>
+        <div class="stat-value" id="statRevenue">Rp0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label"> Rata-rata Pesanan</div>
+        <div class="stat-value" id="statAvg">Rp0</div>
+      </div>
+    </div>
+
+    <!-- Tabel Data Pesanan -->
+    <div class="card">
+      <h2> Data Pesanan</h2>
+      <button onclick="resetData()" class="btn btn-danger btn-sm" style="margin-bottom:16px;">Reset Semua</button>
+
+      <div style="overflow-x:auto;">
+        <table>
+          <thead>
+            <tr>
+              <th>ID Transaksi</th>
+              <th>Tanggal</th>
+              <th>Nama</th>
+              <th>Alamat</th>
+              <th>No HP</th>
+              <th>Keranjang</th>
+              <th>Total</th>
+              <th>Payment</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="tabelData"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Alamat Sekolah -->
+    <div class="address-card">
+      <div class="address-icon">🏫</div>
+      <h3>SMK Wikrama Bogor</h3>
+      <p>Jl. Raya Tajur, Wangun, Kota Bogor, Jawa Barat</p>
+      <p class="address-sub">Proyek Semester Akhir — SMK Wikrama Bogor</p>
+    </div>
+
+  </div>
+
+  <div class="footer">&copy; 2026 Sahabat Baju — Kelompok 4</div>
+
+  <script src="js/script.js"></script>
+</body>
+
+</html>
