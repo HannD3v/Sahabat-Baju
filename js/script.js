@@ -1,20 +1,21 @@
 // ============================================
 // Sahabat Baju — JavaScript (7 Konsep JS)
-// 1. Variable  2. Function  3. DOM Manipulation
-// 4. Event Handling  5. Array Methods
-// 6. Conditional  7. Object & JSON
+//  Variable   Function   DOM Manipulation
+//  Event Handling   Array Methods
+//  Conditional   Object & JSON
 // ============================================
 
-// === 1. VARIABLE ===
+// ===  VARIABLE ===
 const HARGA = 20000; // harga per keranjang
-let orders = JSON.parse(localStorage.getItem('orders')) || []; // 7. JSON
+let orders = JSON.parse(localStorage.getItem('orders')) || []; //  JSON //mengubah string JSON menjadi objek JavaScript asli
+
 
 // === 2. FUNCTION ===
 function formatRupiah(num) {
   return 'Rp' + num.toLocaleString('id-ID');
 }
 
-// === 3. DOM MANIPULATION & 4. EVENT HANDLING ===
+// ===  DOM MANIPULATIONN &  EVENT HANDLINGGG ===
 
 // --- FORM (order.html) ---
 const form = document.getElementById('orderForm');
@@ -36,6 +37,7 @@ if (form) {
   // Cek edit mode
   let editIndex = localStorage.getItem('editIndex');
   if (editIndex !== null) {
+    localStorage.setItem('isEdit', 'true');
     const item = orders[editIndex];
     if (item) {
       document.getElementById('nama').value = item.nama;
@@ -62,7 +64,7 @@ if (form) {
     const nama = document.getElementById('nama').value;
     const alamat = document.getElementById('alamat').value;
     const telp = document.getElementById('telp').value;
-    const jumlah = parseInt(document.getElementById('jumlah').value);
+    const jumlah = parseInt(document.getElementById('jumlah').value);  //bilangan bulat
     const payment = document.getElementById('payment').value;
     const total = jumlah * HARGA;
 
@@ -73,15 +75,23 @@ if (form) {
     // 7. Object literal
     const pesanan = { idTransaksi, tanggalPesanan, nama, alamat, telp, jumlah, total, payment };
 
-    // 5. Array - push
-    orders.push(pesanan);
+    // Cek status edit
+    const isEditMode = localStorage.getItem('isEdit') === 'true';
+    if (isEditMode) {
+      localStorage.removeItem('isEdit');
+    }
+
+    // 5. Array - unshift (posisi teratas)
+    orders.unshift(pesanan);
     localStorage.setItem('orders', JSON.stringify(orders)); // 7. JSON
+
+    const successMsg = isEditMode ? 'Data pesanan berhasil diubah' : 'Pesanan berhasil di buat';
+    localStorage.setItem('toastNotif', successMsg);
 
     // 6. Conditional - redirect berdasarkan payment
     if (payment === 'Transfer' || payment === 'E-Wallet') {
       window.location.href = 'payment.html?nama=' + nama + '&total=' + total + '&metode=' + payment;
     } else {
-      alert('Pesanan berhasil! Bayar di tempat.');
       window.location.href = 'index.html';
     }
   });
@@ -145,7 +155,7 @@ function tampilkanData() {
       '</td>' +
       '</tr>';
 
-    // 3. DOM - innerHTML
+    //  DOM - innerHTML
     tabel.innerHTML += row;
   });
 }
@@ -159,10 +169,11 @@ function editData(index) {
 // Hapus satu data
 function hapusData(index) {
   if (confirm('Hapus pesanan ' + orders[index].nama + '?')) {
-    orders.splice(index, 1); // 5. Array - splice
+    orders.splice(index, 1); // Array - splice
     localStorage.setItem('orders', JSON.stringify(orders));
     tampilkanData();
     updateStats();
+    showToast('Data pesanan berhasil dihapus');
   }
 }
 
@@ -194,4 +205,32 @@ function formatTanggal(dateObj) {
   const menit = String(dateObj.getMinutes()).padStart(2, '0');
 
   return `${hari}, ${tanggal} ${bulan} ${tahun} - ${jam}:${menit}`;
+}
+
+// === TOAST NOTIFICATION ===
+function showToast(msg) {
+  const toast = document.createElement('div');
+  toast.className = 'toast';
+  toast.textContent = msg;
+  document.body.appendChild(toast);
+  
+  setTimeout(function() {
+    toast.classList.add('show');
+  }, 100);
+  
+  setTimeout(function() {
+    toast.classList.remove('show');
+    setTimeout(function() {
+      toast.remove();
+    }, 300);
+  }, 3000);
+}
+
+// Cek toast notifikasi saat berada di beranda
+if (document.getElementById('tabelData')) {
+  const pendingToast = localStorage.getItem('toastNotif');
+  if (pendingToast) {
+    showToast(pendingToast);
+    localStorage.removeItem('toastNotif');
+  }
 }
