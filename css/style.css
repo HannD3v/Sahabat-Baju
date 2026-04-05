@@ -136,6 +136,7 @@ a {
    =========================== */
 .container {
   max-width: 960px;
+  width: 100%;
   margin: 0 auto;
   padding: 32px 16px;
   flex: 1;
@@ -161,7 +162,7 @@ a {
    =========================== */
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   gap: 16px;
   margin-bottom: 24px;
 }
@@ -561,7 +562,7 @@ tbody tr:hover {
   }
 
   .navbar-logo {
-    height: 50px; /* Slight scale down on mobile but let width scale naturally */
+    height: 50px;
   }
 
   .nav-right {
@@ -594,7 +595,33 @@ tbody tr:hover {
     padding: 48px 16px;
   }
 
+  .hero h1 {
+    font-size: 1.5rem;
+  }
+
   .stats-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .card {
+    padding: 16px;
+  }
+
+  /* Paksa tabel bisa scroll horizontal */
+  .card div[style*="overflow-x"] {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  table {
+    min-width: 600px;
+  }
+
+  .address-card {
+    padding: 16px;
+  }
+
+  .team-grid {
     grid-template-columns: 1fr;
   }
 }
